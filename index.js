@@ -3,6 +3,9 @@ var express = require('express'); // 웹서버 사용 .
 var app = express();
 var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
+var mysql = require('mysql');
+var dbconfig   = require('./config/database.js');
+var connection = mysql.createConnection(dbconfig);
 
 app.use(express.static(path.join(__dirname,'/')));
 
@@ -17,4 +20,14 @@ app.get('/', function (req, res) { // 웹서버 기본주소로 접속 할 경�
         res.writeHead(200, { 'Content-Type': 'text/html' }); // Head Type 설정 .
         res.end(data); // 로드 html response .
     });
+});
+
+app.get('/persons', function(req, res){
+
+  connection.query('SELECT * from ty_login', function(err, rows) {
+    if(err) throw err;
+
+    console.log('The solution is: ', rows);
+    res.send(rows);
+  });
 });
