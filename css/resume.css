@@ -190,3 +190,35 @@ a {
 a:hover, a:focus, a:active {
   color: #09343c;
 }
+
+.in-line{
+  width:350px;
+  height:40px;
+}
+.login_common{
+      margin:0;
+}
+.login_input{
+  width:70%;
+  height:100%;
+  font-size:1em;
+  padding-left: 5px;
+  font-style: oblique;
+  display:inline;
+  outline:none;
+  box-sizing: border-box;
+  border-radius:5px 0 0 5px;
+}
+.login_btn{
+  width: 30%;
+  height:100%;
+  background-color: #0c5460;
+  border:none;
+  font-size:1em;
+  color:white;
+  outline:none;
+  display:inline;
+  margin-left: -10px;
+  box-sizing: border-box;
+  border-radius:0 5px 5px 0;
+}
