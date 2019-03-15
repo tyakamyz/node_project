@@ -7,7 +7,7 @@ var path = require('path');
 app.use(express.static(path.join(__dirname,'/')));
 
 // 포트 설정
-app.listen(3000, function () {
+app.listen(80, function () {
     console.log('Server Start .');
 });
 

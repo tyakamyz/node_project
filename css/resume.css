@@ -207,7 +207,10 @@ a:hover, a:focus, a:active {
   display:inline;
   outline:none;
   box-sizing: border-box;
+  border: 2px solid #0c5460;
   border-radius:5px 0 0 5px;
+  display:block !important;
+  float:left;
 }
 .login_btn{
   width: 30%;
