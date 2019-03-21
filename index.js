@@ -6,8 +6,12 @@ var path = require('path');
 var mysql = require('mysql');
 var dbconfig   = require('./config/database.js');
 var connection = mysql.createConnection(dbconfig);
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(express.static(path.join(__dirname,'/')));
+app.use(express.static(path.join('detail','/')));
 
 // 포트 설정
 app.listen(80, function () {
@@ -30,4 +34,26 @@ app.get('/persons', function(req, res){
     console.log('The solution is: ', rows);
     res.send(rows);
   });
+});
+
+app.post('/ajaxtest', function(req, res){
+ 
+    var pwd = req.body.data;
+    
+    connection.query('SELECT * from ty_login', function(err, rows) {
+        if(err){
+            throw err;
+        }else{
+            console.log('POST Parameter = ' + pwd);
+            console.log('The solution is: ', rows[0].pwd);
+            
+            var db = rows[0].pwd;
+            
+            if(db==pwd){
+                res.send('Y');
+            }else{
+                res.send('N');
+            }
+        }
+    });
 });
