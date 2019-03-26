@@ -32,6 +32,7 @@
     "@fortawesome/fontawesome-free": "5.7.2",
     "body-parser": "^1.18.3",
     "bootstrap": "4.3.1",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "get": "^1.4.0",
     "jquery": "3.3.1",
