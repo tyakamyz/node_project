@@ -125,6 +125,32 @@
   <!-- Custom scripts for this template -->
   <script src="js/resume.js"></script>
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script>
+    function jsLogin(){
+        //alert($("#pwd").val());
+
+        var pwd = $("#pwd").val();
+
+        $.ajax({
+            url: '/ajaxtest',                //주소
+            dataType: 'html',                  //데이터 형식
+            type: 'POST',                      //전송 타입
+            data: {data:pwd},
+            success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
+                if(result=='Y'){
+                    $("#adminDetail").load("/detail/admin.js");
+                }else{
+                    alert('비밀번호가 일치하지 않습니다.');
+                }
+
+            }
+        });
+    }      
+
+    function jsLoad(id,url){
+        $("#adminDetail").load(url);
+    }
+  </script>
 </body>
 
 </html>
