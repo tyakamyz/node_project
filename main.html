@@ -132,7 +132,7 @@
         var pwd = $("#pwd").val();
 
         $.ajax({
-            url: '/ajaxtest',                //주소
+            url: '/loginFlag',                //주소
             dataType: 'html',                  //데이터 형식
             type: 'POST',                      //전송 타입
             data: {data:pwd},
@@ -150,6 +150,14 @@
     function jsLoad(id,url){
         $("#adminDetail").load(url);
     }
+      
+    function jsCareerAdd(){
+        var frm = $("form[name=addFrom]");
+        var params = frm.serialize();
+        
+        alert(params);
+    }
+      
   </script>
 </body>
 

@@ -37,7 +37,7 @@ app.get('/persons', function(req, res){
   });
 });
 
-app.post('/ajaxtest', function(req, res){
+app.post('/loginFlag', function(req, res){
  
     var pwd = req.body.data;
     
@@ -73,4 +73,9 @@ app.post('/ajaxtest', function(req, res){
             }
         }
     });
+});
+
+app.post('/careerAdd', function(req, res){
+ 
+    
 });
