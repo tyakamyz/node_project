@@ -5,11 +5,11 @@ var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
 var mysql = require('mysql');
 var dbconfig   = require('./config/database.js');
-var connection = mysql.createConnection(dbconfig);
+var conn = mysql.createConnection(dbconfig);
 var bodyParser = require('body-parser');
 const crypto = require('crypto');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname,'/')));
 app.use(express.static(path.join('detail','/')));
@@ -29,7 +29,7 @@ app.get('/', function (req, res) { // 웹서버 기본주소로 접속 할 경�
 
 app.get('/persons', function(req, res){
 
-  connection.query('SELECT * from ty_login', function(err, rows) {
+  conn.query('SELECT * from ty_login', function(err, rows) {
     if(err) throw err;
 
     console.log('The solution is: ', rows);
@@ -50,7 +50,7 @@ app.post('/loginFlag', function(req, res){
     
    
     
-    connection.query('SELECT pwd, salt from ty_login', function(err, rows) {
+    conn.query('SELECT pwd, salt from ty_login', function(err, rows) {
         if(err){
             throw err;
         }else{
@@ -92,15 +92,15 @@ app.post('/careerAdd', function(req, res){
     
     var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont) values(?,?,?,?,?)'
     
+   // var sql = 'insert into ty_career(title) values("1")'
+    
     conn.query(sql, params, function(err){
-        console.log('asdfsadf');
         if(err){
             console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
         }
     });
-    
-    
-     console.log('asdfsadf222');
-     res.send('Y');
-
+   
 });

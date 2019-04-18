@@ -151,6 +151,7 @@
         $("#"+id).load(url);
     }
       
+      
     function jsCareerAdd(){
         var frm = $("form[name=addForm]");
         var data = frm.serialize();
@@ -166,7 +167,11 @@
             type: 'POST',                      //전송 타입
             data: data,
             success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
-               $("#adminDetail").load("/detail/admin.js");
+                if(result=='Y'){
+                    $("#adminDetail").load("/detail/admin.js");
+                }else{
+                    alert('실패하였습니다.');
+                }
             }
         });
     }
