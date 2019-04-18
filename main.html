@@ -148,14 +148,27 @@
     }      
 
     function jsLoad(id,url){
-        $("#adminDetail").load(url);
+        $("#"+id).load(url);
     }
       
     function jsCareerAdd(){
-        var frm = $("form[name=addFrom]");
-        var params = frm.serialize();
+        var frm = $("form[name=addForm]");
+        var data = frm.serialize();
         
-        alert(params);
+        //alert(frm.find("[name=title]").val());
+        
+        //alert(params);
+        
+        
+        $.ajax({
+            url: '/careerAdd',                //주소
+            dataType: 'html',                  //데이터 형식
+            type: 'POST',                      //전송 타입
+            data: data,
+            success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
+               $("#adminDetail").load("/detail/admin.js");
+            }
+        });
     }
       
   </script>

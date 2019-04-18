@@ -76,6 +76,31 @@ app.post('/loginFlag', function(req, res){
 });
 
 app.post('/careerAdd', function(req, res){
- 
+    var title = req.body.title;
+    var subtitle = req.body.subtitle;
+    var start_dt = req.body.start_dt;
+    var end_dt = req.body.end_dt;
+    var cont = req.body.cont;
     
+    var params = [title,subtitle,start_dt,end_dt,cont];
+   
+    console.log(title);
+    console.log(subtitle);
+    console.log(start_dt);
+    console.log(end_dt);
+    console.log(cont);
+    
+    var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont) values(?,?,?,?,?)'
+    
+    conn.query(sql, params, function(err){
+        console.log('asdfsadf');
+        if(err){
+            console.log(err);
+        }
+    });
+    
+    
+     console.log('asdfsadf222');
+     res.send('Y');
+
 });

@@ -6,16 +6,16 @@
     <form name="addForm" method="post">
     <ul class="fa-ul mb-0">
         <li>
-            <i class="fa-li fa fa-square"></i><input class="admin_input" type="text" value="" placeholder="TITLE">
+            <i class="fa-li fa fa-square"></i><input class="admin_input" type="text" name="title" value="" placeholder="TITLE">
         </li>
         <li>
-            <i class="fa-li fa fa-square"></i><input class="admin_input" type="text" value="" placeholder="SUBTITLE">
+            <i class="fa-li fa fa-square"></i><input class="admin_input" type="text" name="subtitle" value="" placeholder="SUBTITLE">
         </li>
         <li>
-            <i class="fa-li fa fa-square"></i><input class="adminDate_input" type="text" value="" placeholder="YYYYMM"> ~ <input class="adminDate_input" type="text" value="" placeholder="YYYYMM">
+            <i class="fa-li fa fa-square"></i><input class="adminDate_input" type="text" name="start_dt" value="" placeholder="YYYYMM"> ~ <input class="adminDate_input" type="text" name="end_dt" value="" placeholder="YYYYMM">
         </li>
         <li>
-            <i class="fa-li fa fa-square"></i><textarea class="admin_input" rows="10" placeholder="CONTENT"></textarea>
+            <i class="fa-li fa fa-square"></i><textarea class="admin_input" name="cont" rows="10" placeholder="CONTENT"></textarea>
         </li>
     </ul>
     </form>
