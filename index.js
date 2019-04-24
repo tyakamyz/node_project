@@ -75,6 +75,36 @@ app.post('/loginFlag', function(req, res){
     });
 });
 
+app.post('/adminList', function(req, res){        
+    conn.query('SELECT ty_id, title from ty_career', function(err, rows) {
+        if(err){
+            throw err;
+        }else{
+            res.send(rows);
+        }
+    });
+});
+
+app.get('/adminView', function(req, res){    
+    
+    var ty_id = req.query.ty_id;
+    
+    /*conn.query('SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = '+ty_id, function(err, rows) {
+        if(err){
+            throw err;
+        }else{
+            //res.send(rows);
+            fs.readFile('/detail/adminAdd.js'), function(error, data){
+                res.writeHead(200, { 'Content-Type': 'text/html' }); // Head Type 설정 .
+                res.end(data); // 로드 html response .
+            }
+        }
+    });*/
+    res.writeHead(200, { 'Content-Type': 'text/html' }); // Head Type 설정 .
+    res.redirect('/adminAdd.js');
+    res.end(data); // 로드 html response .
+});
+
 app.post('/careerAdd', function(req, res){
     var title = req.body.title;
     var subtitle = req.body.subtitle;
