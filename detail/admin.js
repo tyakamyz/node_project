@@ -6,7 +6,7 @@
             success:function(data){
                 $('#list').empty();
                 $(data).each(function(index,item){
-                    $('#adminList').append('<li><a href="/adminView?ty_id='+item.ty_id+'"><i class="fa-li fa fa-user-cog"></i>'+item.title+'</li>');
+                    $('#adminList').append('<li><a href="javascript:void(0);" onClick="jsAdminMod('+item.ty_id+');"><i class="fa-li fa fa-user-cog"></i>'+item.title+'</li>');
                 });
             }
         });

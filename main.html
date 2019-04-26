@@ -35,6 +35,7 @@
 </head>
 
 <body id="page-top">
+    <input type="hidden" id="ty_id_view" name="ty_id_view" value="" />
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -174,7 +175,45 @@
                 }
             }
         });
+    }      
+      
+    function jsCareerMod(){
+        var frm = $("form[name=modForm]");
+        var data = frm.serialize();
+        
+        //alert(frm.find("[name=title]").val());
+        
+        //alert(params);
+        
+        
+        $.ajax({
+            url: '/careerModReal',                //주소
+            dataType: 'html',                  //데이터 형식
+            type: 'POST',                      //전송 타입
+            data: data,
+            success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
+                if(result=='Y'){
+                    $("#adminDetail").load("/detail/admin.js");
+                }else{
+                    alert('실패하였습니다.');
+                }
+            }
+        });
     }
+      
+    function jsAdminMod(ty_id){
+        $.ajax({
+            url: '/careerMod',                //주소
+            dataType: 'html',                  //데이터 형식
+            type: 'POST',                      //전송 타입
+            data: {data:ty_id},
+            success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
+                $("#adminDetail").load("/detail/adminMod.js");
+                $("#ty_id_view").val(result);
+            }
+        });
+    }      
+
       
   </script>
 </body>

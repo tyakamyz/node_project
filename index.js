@@ -1,6 +1,9 @@
 // 사용 모듈 로드
 var express = require('express'); // 웹서버 사용 .
 var app = express();
+app.set('view engine','ejs');
+app.set('views','./views_ejs');
+
 var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
 var mysql = require('mysql');
@@ -85,9 +88,17 @@ app.post('/adminList', function(req, res){
     });
 });
 
-app.get('/adminView', function(req, res){    
+
+app.post('/careerMod', function(req, res){
+ 
+    var ty_id = req.body.data;
     
-    var ty_id = req.query.ty_id;
+    res.send(ty_id);
+});
+
+app.post('/careerModData', function(req, res){    
+    
+    var ty_id = req.body.data;
     
     conn.query('SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = '+ty_id, function(err, rows) {
         if(err){
@@ -108,13 +119,46 @@ app.post('/careerAdd', function(req, res){
     
     var params = [title,subtitle,start_dt,end_dt,cont];
    
-    console.log(title);
+    /*console.log(title);
     console.log(subtitle);
     console.log(start_dt);
     console.log(end_dt);
-    console.log(cont);
+    console.log(cont);*/
     
     var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont) values(?,?,?,?,?)'
+    
+   // var sql = 'insert into ty_career(title) values("1")'
+    
+    conn.query(sql, params, function(err){
+        if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+    });
+   
+});
+
+app.post('/careerModReal', function(req, res){
+    var ty_id = req.body.ty_id;
+    var title = req.body.title;
+    var subtitle = req.body.subtitle;
+    var start_dt = req.body.start_dt;
+    var end_dt = req.body.end_dt;
+    var cont = req.body.cont;
+    
+    var params = [title,subtitle,start_dt,end_dt,cont];
+   
+    /*console.log(title);
+    console.log(subtitle);
+    console.log(start_dt);
+    console.log(end_dt);
+    console.log(cont);*/
+    
+    var sql = 'update ty_career set title = ?, subtitle = ?, start_dt = ?, end_dt = ?, cont = ? where ty_id = ' + ty_id;
+    
+    //console.log("sql : "+sql);
     
    // var sql = 'insert into ty_career(title) values("1")'
     
