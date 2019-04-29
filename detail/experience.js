@@ -17,6 +17,6 @@
 </script>
 
 <div class="w-100">
-    <h2 class="mb-5">Experience</h2>
+    <h2 class="mb-5">Project</h2>
     <div id="experienceList" />
 </div>
