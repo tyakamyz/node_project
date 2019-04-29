@@ -1,8 +1,6 @@
 // 사용 모듈 로드
 var express = require('express'); // 웹서버 사용 .
 var app = express();
-app.set('view engine','ejs');
-app.set('views','./views_ejs');
 
 var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
@@ -78,8 +76,8 @@ app.post('/loginFlag', function(req, res){
     });
 });
 
-app.post('/adminList', function(req, res){        
-    conn.query('SELECT ty_id, title from ty_career', function(err, rows) {
+app.post('/adminList', function(req, res){       
+    conn.query('SELECT ty_id, title, subtitle, cont, start_dt, end_dt from ty_career', function(err, rows) {
         if(err){
             throw err;
         }else{
@@ -171,4 +169,40 @@ app.post('/careerModReal', function(req, res){
         }
     });
    
+});
+
+/*app.post('/careerDel', function(req, res){
+    var ty_id = req.body.data;
+    
+    console.log(ty_id);
+    
+    var sql = 'delete from ty_career where ty_id = ' + ty_id;
+    
+    conn.query(sql, params, function(err){
+        if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+    });
+   
+});*/
+
+app.post('/careerDel', function(req, res){
+ 
+    var ty_id = req.body.data;
+    
+    var sql = 'delete from ty_career where ty_id = ' + ty_id;
+    
+    conn.query(sql, function(err){
+        if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+    });
+    
+    //res.send(ty_id);
 });

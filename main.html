@@ -213,6 +213,24 @@
             }
         });
     }      
+      
+    function jsCareerDel(){
+        var msg = confirm("삭제하시겠습니까?");
+        if(msg){
+            var ty_id = $("form[name=modForm]").find("[name=ty_id]").val();
+         
+             $.ajax({
+                url: '/careerDel',                //주소
+                dataType: 'html',                  //데이터 형식
+                type: 'POST',                      //전송 타입
+                data: {data:ty_id},
+                success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
+                    $("#adminDetail").load("/detail/admin.js");
+                    alert("삭제완료");
+                }
+            });
+        }
+    }
 
       
   </script>

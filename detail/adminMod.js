@@ -42,6 +42,9 @@
         <li>
             <i class="fa-li fa fa-square"></i><textarea class="admin_input" name="cont" rows="10" placeholder="CONTENT"></textarea>
         </li>
+        <li>
+            <a href="javascript:void(0);" onClick="javascript:jsCareerDel();"> <i class="fa-li fa fa-trash"></i>삭제</a>
+        </li>
     </ul>
     </form>
 </div>
