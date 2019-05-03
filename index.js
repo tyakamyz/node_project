@@ -6,6 +6,7 @@ var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
 var mysql = require('mysql');
 var dbconfig   = require('./config/database.js');
+var pool= mysql.createPool(dbconfig);
 var conn = mysql.createConnection(dbconfig);
 var bodyParser = require('body-parser');
 const crypto = require('crypto');
@@ -29,13 +30,22 @@ app.get('/', function (req, res) { // 웹서버 기본주소로 접속 할 경�
 });
 
 app.get('/persons', function(req, res){
+    pool.getConnection(function(err,conn){
+        conn.query("SELECT * from ty_login",function(err,rows){
+        if(err) throw err;
 
-  conn.query('SELECT * from ty_login', function(err, rows) {
+        console.log('The solution is: ', rows);
+        res.send(rows);
+            
+        conn.release();
+        });
+    });
+  /*conn.query('SELECT * from ty_login', function(err, rows) {
     if(err) throw err;
 
     console.log('The solution is: ', rows);
     res.send(rows);
-  });
+  });*/
 });
 
 app.post('/loginFlag', function(req, res){
@@ -49,9 +59,9 @@ app.post('/loginFlag', function(req, res){
       });
     });*/   //패스워드 키(salt 만들기)
     
-   
-    
-    conn.query('SELECT pwd, salt from ty_login', function(err, rows) {
+    pool.getConnection(function(err,conn){
+        conn.query("SELECT pwd, salt from ty_login",function(err,rows){
+        
         if(err){
             throw err;
         }else{
@@ -73,16 +83,51 @@ app.post('/loginFlag', function(req, res){
                 res.send('N');
             }
         }
+            
+        conn.release();
+        });
     });
+    /*conn.query('SELECT pwd, salt from ty_login', function(err, rows) {
+        if(err){
+            throw err;
+        }else{
+            //console.log('POST Parameter = ' + pwd);
+            //console.log('The solution is: ', rows[0].pwd);
+            //console.log('The solution is: ', rows[0].salt);
+            
+            var dbPwd = rows[0].pwd;
+            var dbSalt = rows[0].salt;
+            
+            pwd = crypto.createHash('sha512').update(pwd+dbSalt).digest('base64');
+            
+            //console.log("1.dbPwd : " + dbPwd);
+            //console.log("2.pwd : " + pwd);
+            
+            if(dbPwd===pwd){
+                res.send('Y');
+            }else{
+                res.send('N');
+            }
+        }
+    });*/
 });
 
 app.post('/adminList', function(req, res){       
-    conn.query('SELECT ty_id, title, subtitle, cont, start_dt, end_dt from ty_career', function(err, rows) {
+    /*conn.query('SELECT ty_id, title, subtitle, cont, start_dt, end_dt from ty_career', function(err, rows) {
         if(err){
             throw err;
         }else{
             res.send(rows);
         }
+    });*/
+    pool.getConnection(function(err,conn){
+        conn.query("SELECT ty_id, title, subtitle, cont, start_dt, end_dt from ty_career",function(err,rows){
+        //rows를 처리할 내용
+        res.send(rows);
+        //release를 해주어 커넥션이 pool로 되돌아 갈 수 있도록 해줍니다.
+        conn.release();
+        //이제 이 커넥션은 pool로 돌아가 다른 주체가 사용 할 수 있도록 준비합니다.
+        });
     });
 });
 
@@ -98,13 +143,24 @@ app.post('/careerModData', function(req, res){
     
     var ty_id = req.body.data;
     
-    conn.query('SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = '+ty_id, function(err, rows) {
+     pool.getConnection(function(err,conn){
+        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = "+ty_id,function(err,rows){
         if(err){
             throw err;
         }else{
             res.send(rows);
         }
+            
+        conn.release();
+        });
     });
+    /*conn.query('SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = '+ty_id, function(err, rows) {
+        if(err){
+            throw err;
+        }else{
+            res.send(rows);
+        }
+    });*/
 
 });
 
@@ -127,15 +183,26 @@ app.post('/careerAdd', function(req, res){
     
    // var sql = 'insert into ty_career(title) values("1")'
     
-    conn.query(sql, params, function(err){
+    pool.getConnection(function(err,conn){
+        conn.query(sql, params, function(err){
+         if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+            
+        conn.release();
+        });
+    });
+   /* conn.query(sql, params, function(err){
         if(err){
             console.log(err);
             res.send('N');
         }else{
             res.send('Y');
         }
-    });
-   
+    });*/
 });
 
 app.post('/careerModReal', function(req, res){
@@ -160,14 +227,26 @@ app.post('/careerModReal', function(req, res){
     
    // var sql = 'insert into ty_career(title) values("1")'
     
-    conn.query(sql, params, function(err){
+    pool.getConnection(function(err,conn){
+        conn.query(sql, params, function(err){
         if(err){
             console.log(err);
             res.send('N');
         }else{
             res.send('Y');
         }
+            
+        conn.release();
+        });
     });
+    /*conn.query(sql, params, function(err){
+        if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+    });*/
    
 });
 
@@ -195,14 +274,39 @@ app.post('/careerDel', function(req, res){
     
     var sql = 'delete from ty_career where ty_id = ' + ty_id;
     
-    conn.query(sql, function(err){
+    
+    pool.getConnection(function(err,conn){
+        conn.query(sql, function(err){
         if(err){
             console.log(err);
             res.send('N');
         }else{
             res.send('Y');
         }
+            
+        conn.release();
+        });
     });
+    /*conn.query(sql, function(err){
+        if(err){
+            console.log(err);
+            res.send('N');
+        }else{
+            res.send('Y');
+        }
+    });*/
     
     //res.send(ty_id);
 });
+
+setInterval(keepAlive, 60*1000);
+
+function keepAlive(){
+    //console.log("keepAlive 실행");
+   pool.getConnection(function(err, conn){
+     if(err) { return; }
+     conn.ping();
+     conn.release();
+   });
+     //console.log("keepAlive 종료");
+}
