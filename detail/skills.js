@@ -1,8 +1,20 @@
 <div class="w-100">
     <h2 class="mb-5">Skills</h2>
 
-    <div class="subheading mb-3">Programming Languages &amp; Tools</div>
+    <div class="subheading mb-3">Programming Languages &amp; ETC</div>
     <ul class="list-inline dev-icons">
+      <li class="list-inline-item">
+        <i class="fab fa-windows"></i>
+      </li>
+      <li class="list-inline-item">
+        <i class="fab fa-linux"></i>
+      </li>
+      <li class="list-inline-item">
+        <i class="fab fa-redhat"></i>
+      </li>
+      <li class="list-inline-item">
+        <i class="fab fa-centos"></i>
+      </li>
       <li class="list-inline-item">
         <i class="fab fa-html5"></i>
       </li>
@@ -10,50 +22,35 @@
         <i class="fab fa-css3-alt"></i>
       </li>
       <li class="list-inline-item">
+        <i class="fab fa-java"></i>
+      </li>
+      <li class="list-inline-item">
         <i class="fab fa-js-square"></i>
       </li>
       <li class="list-inline-item">
-        <i class="fab fa-angular"></i>
+        <i class="fab fa-node"></i>
       </li>
       <li class="list-inline-item">
-        <i class="fab fa-react"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-node-js"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-sass"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-less"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-wordpress"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-gulp"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-grunt"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fab fa-npm"></i>
+        <i class="fab fa-github"></i>
       </li>
     </ul>
 
-    <div class="subheading mb-3">Workflow</div>
+    <!--<div class="subheading mb-3">Workflow</div>-->
     <ul class="fa-ul mb-0">
       <li>
         <i class="fa-li fa fa-check"></i>
-        Mobile-First, Responsive Design</li>
+        Windows, Linux, Unix</li>
       <li>
         <i class="fa-li fa fa-check"></i>
-        Cross Browser Testing &amp; Debugging</li>
+        Java, JavaScript, JQuery, NodeJS</li>
       <li>
         <i class="fa-li fa fa-check"></i>
-        Cross Functional Teams</li>
+        Oracle, Cubrid, DB2, Tibero, Mysql</li>
       <li>
         <i class="fa-li fa fa-check"></i>
-        Agile Development &amp; Scrum</li>
+        Tomcat, Jeus</li>
+      <li>
+        <i class="fa-li fa fa-check"></i>
+        Spring, EgovFramework, Express, Bootstrap, iBatis</li>
     </ul>
 </div>
