@@ -19,6 +19,7 @@
     <link href="css/resume.css" rel="stylesheet">
    
     <script src="http://code.jquery.com/jquery.min.js"></script>
+    
     <script type="text/javascript">
     $(document).ready(function(){
         $("#aboutDetail").load("/detail/about.js");
@@ -126,6 +127,8 @@
   <!-- Custom scripts for this template -->
   <script src="js/resume.js"></script>
   <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/jquery.form.js"></script>
+    
   <script>
     function jsLogin(){
         //alert($("#pwd").val());
@@ -154,19 +157,16 @@
       
       
     function jsCareerAdd(){
-        var frm = $("form[name=addForm]");
-        var data = frm.serialize();
         
-        //alert(frm.find("[name=title]").val());
-        
-        //alert(params);
-        
-        
+        var form = $("form[name=addForm]")[0];
+        var formData = new FormData(form);
+         
         $.ajax({
             url: '/careerAdd',                //주소
             dataType: 'html',                  //데이터 형식
             type: 'POST',                      //전송 타입
             data: data,
+            enctype: 'multipart/form-data',
             success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
                 if(result=='Y'){
                     $("#adminDetail").load("/detail/admin.js");
@@ -175,6 +175,7 @@
                 }
             }
         });
+        
     }      
       
     function jsCareerMod(){
