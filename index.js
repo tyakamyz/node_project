@@ -1,6 +1,17 @@
 // 사용 모듈 로드
 var express = require('express'); // 웹서버 사용 .
 var app = express();
+var multer = require('multer');
+var upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
+    }
+  }),
+});
 
 var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
@@ -164,14 +175,22 @@ app.post('/careerModData', function(req, res){
 
 });
 
-app.post('/careerAdd', function(req, res){
+app.post('/careerAdd', upload.single('uploadFile'), function(req, res){
+    
+    //console.log(req.file); 
+    
     var title = req.body.title;
     var subtitle = req.body.subtitle;
     var start_dt = req.body.start_dt;
     var end_dt = req.body.end_dt;
     var cont = req.body.cont;
+
+    var file_path = req.file.path;
+    var file_name = req.file.filename;
+    var file_origin_name = req.file.originalname;
     
-    var params = [title,subtitle,start_dt,end_dt,cont];
+    
+    var params = [title,subtitle,start_dt,end_dt,cont,file_path,file_name,file_origin_name];
    
     /*console.log(title);
     console.log(subtitle);
@@ -179,7 +198,7 @@ app.post('/careerAdd', function(req, res){
     console.log(end_dt);
     console.log(cont);*/
     
-    var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont) values(?,?,?,?,?)'
+    var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name) values(?,?,?,?,?,?,?,?)'
     
    // var sql = 'insert into ty_career(title) values("1")'
     

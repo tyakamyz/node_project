@@ -165,8 +165,10 @@
             url: '/careerAdd',                //주소
             dataType: 'html',                  //데이터 형식
             type: 'POST',                      //전송 타입
-            data: data,
+            data: formData,
             enctype: 'multipart/form-data',
+            contentType: false,
+            processData: false,
             success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
                 if(result=='Y'){
                     $("#adminDetail").load("/detail/admin.js");
