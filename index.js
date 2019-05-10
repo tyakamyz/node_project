@@ -13,6 +13,8 @@ var upload = multer({
   }),
 });
 
+var iconvLite = require('iconv-lite');
+var mime = require('mime');
 var fs = require('fs'); // 파일 로드 사용.
 var path = require('path');
 var mysql = require('mysql');
@@ -38,6 +40,35 @@ app.get('/', function (req, res) { // 웹서버 기본주소로 접속 할 경�
         res.writeHead(200, { 'Content-Type': 'text/html' }); // Head Type 설정 .
         res.end(data); // 로드 html response .
     });
+});
+
+app.get('/downloadfile', function(req, res){
+    //console.log('download');
+    
+    var ty_id = req.param('ty_id');
+    
+    pool.getConnection(function(err,conn){
+        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name  from ty_career where ty_id = "+ty_id,function(err,rows){
+            if(err){
+                throw err;
+            }else{
+                var origFileNm = rows[0].file_origin_name;
+                var file = rows[0].file_path;
+                console.log(origFileNm);
+
+               mimetype = mime.lookup( origFileNm ); // => 'application/zip', 'text/plain', 'image/png' 등을 반환
+               console.log('mimetype : ' + mimetype);
+
+               res.setHeader('Content-disposition', 'attachment; filename=' + getDownloadFilename(req, origFileNm)); //origFileNm으로 로컬PC에 파일 저장
+               res.setHeader('Content-type', mimetype);
+
+               var filestream = fs.createReadStream(file);
+               filestream.pipe(res);
+            }
+            conn.release();
+        });
+    });
+    
 });
 
 app.get('/persons', function(req, res){
@@ -155,7 +186,7 @@ app.post('/careerModData', function(req, res){
     var ty_id = req.body.data;
     
      pool.getConnection(function(err,conn){
-        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont from ty_career where ty_id = "+ty_id,function(err,rows){
+        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name  from ty_career where ty_id = "+ty_id,function(err,rows){
         if(err){
             throw err;
         }else{
@@ -328,4 +359,20 @@ function keepAlive(){
      conn.release();
    });
      //console.log("keepAlive 종료");
+}
+
+function getDownloadFilename(req, filename) {
+    var header = req.headers['user-agent'];
+
+    if (header.includes("MSIE") || header.includes("Trident")) { 
+        return encodeURIComponent(filename).replace(/\\+/gi, "%20");
+    } else if (header.includes("Chrome")) {
+        return iconvLite.decode(iconvLite.encode(filename, "UTF-8"), 'ISO-8859-1');
+    } else if (header.includes("Opera")) {
+        return iconvLite.decode(iconvLite.encode(filename, "UTF-8"), 'ISO-8859-1');
+    } else if (header.includes("Firefox")) {
+        return iconvLite.decode(iconvLite.encode(filename, "UTF-8"), 'ISO-8859-1');
+    }
+
+    return filename;
 }

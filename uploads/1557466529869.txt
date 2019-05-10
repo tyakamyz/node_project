@@ -1,0 +1,172 @@
+﻿CREATE TABLE TB_CLSSAGE_LANG
+(
+  CA_ID        NUMBER                           NOT NULL,
+  LANG_DIV     NUMBER                           NOT NULL,
+  CA_P_ID      NUMBER                           NOT NULL,
+  CA_LEVEL     NUMBER                           NOT NULL,
+  CA_RANK      NUMBER                           NOT NULL,
+  CA_CD_NUM    VARCHAR(150),
+  CA_NAME      VARCHAR(300),
+  CREATEDD     VARCHAR(8),
+  ENDDD        VARCHAR(8),
+  REMK         VARCHAR(100),
+  REG_ID       VARCHAR(35),
+  REG_NAME     VARCHAR(30),
+  REG_DT       VARCHAR(14),
+  SYS_ID       VARCHAR(35),
+  SYS_NAME     VARCHAR(30),
+  SYS_DT       VARCHAR(14),
+  EXT_OPEN_YN  VARCHAR(1),
+  PDDT         VARCHAR(500),
+  REFCD        VARCHAR(50),
+  MNGCYCLE     VARCHAR(1000),
+  CA_CLASS     VARCHAR(2),
+  SCOOP        VARCHAR(500),
+  CHARGEID     VARCHAR(20),
+  TECHDAY      VARCHAR(8)
+);
+
+
+
+
+CREATE TABLE TB_CLSSPROV_LANG
+(
+  CP_ID         NUMBER                          NOT NULL,
+  LANG_DIV      NUMBER                          NOT NULL,
+  CP_P_ID       NUMBER                          NOT NULL,
+  CP_LEVEL      NUMBER                          NOT NULL,
+  CP_RANK       NUMBER,
+  CP_CLASS      VARCHAR(100),
+  SYMBOL        VARCHAR(6),
+  PROVENANCE    VARCHAR(300),
+  TIMELVL       VARCHAR(45),
+  OBJECTLVL     VARCHAR(100),
+  PRODUCER      VARCHAR(100),
+  PDLIST        VARCHAR(500),
+  OBJLIST       VARCHAR(500),
+  RECIPT        VARCHAR(100),
+  SCOOP         VARCHAR(500),
+  REPEAL        VARCHAR(100),
+  SYST_ARNG     VARCHAR(100),
+  SEARCH        VARCHAR(100),
+  APPROACH      VARCHAR(100),
+  USE_RESTRICT  VARCHAR(100),
+  PHYSIC        VARCHAR(100),
+  PERSUAL       VARCHAR(100),
+  REL_COPY      VARCHAR(100),
+  REL_DATA      VARCHAR(100),
+  REL_PRINT     VARCHAR(100),
+  REMK          VARCHAR(500),
+  CHARGEID      VARCHAR(20),
+  TECHRULE      VARCHAR(100),
+  TECHDAY       VARCHAR(8),
+  CREATEDD      VARCHAR(8),
+  ENDDD         VARCHAR(8),
+  REG_ID        VARCHAR(35),
+  REG_NAME      VARCHAR(30),
+  REG_DT        VARCHAR(14),
+  SYS_ID        VARCHAR(35),
+  SYS_NAME      VARCHAR(30),
+  SYS_DT        VARCHAR(14),
+  EXT_OPEN_YN   VARCHAR(1),
+  PDDT          VARCHAR(500),
+  MNGCYCLE      VARCHAR(1000),
+  ACQSWAY       VARCHAR(1000),
+  REFCD         VARCHAR(50),
+  PDHIST        VARCHAR(1000)
+);
+
+
+CREATE TABLE TB_CLSSFRM_LANG
+(
+  CF_ID        NUMBER                           NOT NULL,
+  LANG_DIV     NUMBER                           NOT NULL,
+  CF_P_ID      NUMBER                           NOT NULL,
+  CF_LEVEL     NUMBER                           NOT NULL,
+  CF_RANK      NUMBER                           NOT NULL,
+  CF_CD_NUM    VARCHAR(150),
+  CF_NAME      VARCHAR(300),
+  CREATEDD     VARCHAR(8),
+  ENDDD        VARCHAR(8),
+  REMK         VARCHAR(100),
+  REG_ID       VARCHAR(35),
+  REG_NAME     VARCHAR(30),
+  REG_DT       VARCHAR(14),
+  SYS_ID       VARCHAR(35),
+  SYS_NAME     VARCHAR(30),
+  SYS_DT       VARCHAR(14),
+  EXT_OPEN_YN  VARCHAR(1),
+  PDDT         VARCHAR(500),
+  REFCD        VARCHAR(50),
+  MNGCYCLE     VARCHAR(1000),
+  CHARGEID     VARCHAR(20),
+  TECHDAY      VARCHAR(8),
+  SCOOP        VARCHAR(500),
+  I_TYPE       VARCHAR(3)
+);
+
+
+
+CREATE TABLE TB_CLSSSUB_LANG
+(
+  CS_ID         NUMBER                          NOT NULL,
+  LANG_DIV      NUMBER                          NOT NULL,
+  CS_P_ID       NUMBER                          NOT NULL,
+  CS_LEVEL      NUMBER                          NOT NULL,
+  CS_RANK       NUMBER                          NOT NULL,
+  CS_CLASS      VARCHAR(2),
+  SYMBOL        VARCHAR(6),
+  SUBJECT       VARCHAR(100),
+  TIMELVL       VARCHAR(45),
+  OBJECTLVL     VARCHAR(100),
+  PRODUCER      VARCHAR(100),
+  PDLIST        VARCHAR(500),
+  OBJLIST       VARCHAR(500),
+  RECIPT        VARCHAR(100),
+  SCOOP         VARCHAR(500),
+  REPEAL        VARCHAR(100),
+  SYST_ARNG     VARCHAR(100),
+  SEARCH        VARCHAR(100),
+  APPROACH      VARCHAR(100),
+  USE_RESTRICT  VARCHAR(100),
+  PHYSIC        VARCHAR(100),
+  PERSUAL       VARCHAR(100),
+  REL_COPY      VARCHAR(100),
+  REL_DATA      VARCHAR(100),
+  REL_PRINT     VARCHAR(100),
+  REMK          VARCHAR(500),
+  CHARGEID      VARCHAR(20),
+  TECHRULE      VARCHAR(100),
+  TECHDAY       VARCHAR(8),
+  CREATEDD      VARCHAR(8),
+  ENDDD         VARCHAR(8),
+  REG_ID        VARCHAR(35),
+  REG_NAME      VARCHAR(20),
+  REG_DT        VARCHAR(14),
+  SYS_ID        VARCHAR(35),
+  SYS_NAME      VARCHAR(20),
+  SYS_DT        VARCHAR(14),
+  EXT_OPEN_YN   VARCHAR(1),
+  PDDT          VARCHAR(500),
+  REFCD         VARCHAR(50),
+  MNGCYCLE      VARCHAR(1000)
+);
+
+
+
+
+
+
+
+insert into tb_clssprov_lang(cp_id, lang_div, cp_p_id, cp_level, cp_rank, REFCD, CP_CLASS, CHARGEID) select cp_id, '1', cp_p_id, cp_level, cp_rank, REFCD, CP_CLASS, '관리자' from tb_clssprov;
+insert into tb_clssprov_lang(cp_id, lang_div, cp_p_id, cp_level, cp_rank, REFCD, CP_CLASS, CHARGEID) select cp_id, '2', cp_p_id, cp_level, cp_rank, REFCD, CP_CLASS, '관리자' from tb_clssprov;
+
+insert into tb_clssfrm_lang(cf_id, lang_div, cf_p_id, cf_level, cf_rank, REFCD, CHARGEID) select cf_id, '1', cf_p_id, cf_level, cf_rank, REFCD, '관리자' from tb_clssfrm;
+insert into tb_clssfrm_lang(cf_id, lang_div, cf_p_id, cf_level, cf_rank, REFCD, CHARGEID) select cf_id, '2', cf_p_id, cf_level, cf_rank, REFCD, '관리자' from tb_clssfrm;
+
+insert into tb_clsssub_lang(cs_id, lang_div, cs_p_id, cs_level, cs_rank, REFCD, CS_CLASS, CHARGEID) select cs_id, '1', cs_p_id, cs_level, cs_rank, REFCD, CS_CLASS, '관리자' from tb_clsssub;
+insert into tb_clsssub_lang(cs_id, lang_div, cs_p_id, cs_level, cs_rank, REFCD, CS_CLASS, CHARGEID) select cs_id, '2', cs_p_id, cs_level, cs_rank, REFCD, CS_CLASS, '관리자' from tb_clsssub;
+
+insert into tb_clssage_lang(ca_id, lang_div, ca_p_id, ca_level, ca_rank, REFCD, CA_CLASS, CHARGEID) select ca_id, '1', ca_p_id, ca_level, ca_rank, REFCD, CA_CLASS, '관리자' from tb_clssage;
+insert into tb_clssage_lang(ca_id, lang_div, ca_p_id, ca_level, ca_rank, REFCD, CA_CLASS, CHARGEID) select ca_id, '2', ca_p_id, ca_level, ca_rank, REFCD, CA_CLASS, '관리자' from tb_clssage;
+
