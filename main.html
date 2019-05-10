@@ -181,19 +181,18 @@
     }      
       
     function jsCareerMod(){
-        var frm = $("form[name=modForm]");
-        var data = frm.serialize();
         
-        //alert(frm.find("[name=title]").val());
-        
-        //alert(params);
-        
-        
+        var form = $("form[name=modForm]")[0];
+        var formData = new FormData(form);
+         
         $.ajax({
             url: '/careerModReal',                //주소
             dataType: 'html',                  //데이터 형식
             type: 'POST',                      //전송 타입
-            data: data,
+            data: formData,
+            enctype: 'multipart/form-data',
+            contentType: false,
+            processData: false,
             success: function(result) {          //성공했을 때 함수 인자 값으로 결과 값 나옴
                 if(result=='Y'){
                     $("#adminDetail").load("/detail/admin.js");

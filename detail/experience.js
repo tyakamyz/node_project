@@ -9,7 +9,10 @@
                                                +'<h3 class="mb-0">'+item.title+'</h3>'
                                                +'<div class="subheading mb-3">'+item.subtitle+'</div>'
                                                +'<p>'+item.cont+'</p></div>'
-                                               +'<div class="resume-date text-md-right"><span class="text-primary">'+item.start_dt+' - '+item.end_dt+'</span></div></div>');
+                                               +'<div class="resume-date text-md-right"><span class="text-primary">'+item.start_dt+' - '+item.end_dt+'</span><br><br>'
+                                               +'<a href="/downloadfile?ty_id='+item.ty_id+'"><span><img src="./../img/pdf_icon.png" style="height: 100px;"></span><br>'
+                                               +'<span>PDF로 자세히보기</span></a>'
+                                               +'</div></div>');
                 });
             }
         });

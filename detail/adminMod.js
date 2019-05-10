@@ -33,7 +33,7 @@
         <input class="login_common admin_Lbtn" type="button" id="loginBtn" value="SAVE" onClick="javascript:jsCareerMod();">
         <input class="login_common admin_Rbtn" type="button" id="loginBtn" value="BACK" onClick="javascript:jsLoad('adminDetail','/detail/admin.js');">
     </h2>
-    <form name="modForm" method="post" action="/careerModReal">
+    <form name="modForm" method="post" action="/careerModReal" enctype="multipart/form-data">
     <input type="hidden" id="ty_id" name="ty_id" value="" />
     <input type="hidden" id="ty_id" name="file_path" value="" />
     <input type="hidden" id="ty_id" name="file_name, file_origin_name" value="" />

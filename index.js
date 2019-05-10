@@ -255,7 +255,7 @@ app.post('/careerAdd', upload.single('uploadFile'), function(req, res){
     });*/
 });
 
-app.post('/careerModReal', function(req, res){
+app.post('/careerModReal', upload.single('uploadFile'), function(req, res){
     var ty_id = req.body.ty_id;
     var title = req.body.title;
     var subtitle = req.body.subtitle;
@@ -263,7 +263,18 @@ app.post('/careerModReal', function(req, res){
     var end_dt = req.body.end_dt;
     var cont = req.body.cont;
     
-    var params = [title,subtitle,start_dt,end_dt,cont];
+    if(req.file.path != null){
+        var file_path = req.file.path;
+        var file_name = req.file.filename;
+        var file_origin_name = req.file.originalname;
+    }else{
+        var file_path = req.body.file_path;
+        var file_name = req.body.file_name;
+        var file_origin_name = req.body.file_origin_name;
+    }
+   
+    
+    var params = [title,subtitle,start_dt,end_dt,cont,file_path,file_name,file_origin_name];
    
     /*console.log(title);
     console.log(subtitle);
@@ -271,7 +282,7 @@ app.post('/careerModReal', function(req, res){
     console.log(end_dt);
     console.log(cont);*/
     
-    var sql = 'update ty_career set title = ?, subtitle = ?, start_dt = ?, end_dt = ?, cont = ? where ty_id = ' + ty_id;
+    var sql = 'update ty_career set title = ?, subtitle = ?, start_dt = ?, end_dt = ?, cont = ?, file_path = ?, file_name = ?, file_origin_name = ? where ty_id = ' + ty_id;
     
     //console.log("sql : "+sql);
     
