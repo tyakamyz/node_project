@@ -19,7 +19,13 @@
                     $("form[name=modForm]").find("[name=file_origin_name]").val(item.file_origin_name);
                     //$("form[name=modForm]").find("[name=file_nm]").text(item.file_origin_name);
                     
-                    $("#fileList").append('<a href="/downloadfile?ty_id='+ty_id+'">'+item.file_origin_name+'</a>');
+                    var fileNm = item.file_origin_name;
+                    
+                    if(fileNm == null){
+                        fileNm = "파일없음";
+                    }
+                    
+                    $("#fileList").append('<a href="/downloadfile?ty_id='+ty_id+'">'+fileNm+'</a>');
                 });
             }
         });

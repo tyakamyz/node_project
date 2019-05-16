@@ -234,6 +234,27 @@
         }
     }
 
+    function jsApuntePopupExe(sUrl, sName, iWidth, iHeight) {
+        var features;
+        var t = screen.height / 2 - iHeight / 2;
+        var l = screen.width / 2 - iWidth / 2;
+
+        var option = "toolbar=no,menubar=no,location=no,scrollbars=no,status=no,resizable=no,maximize=no";
+        features = "top=" + t + ",left=" + l + ",width=" + iWidth + ",height=" + iHeight + "," + option;
+
+        var PopupOpen = window.open(sUrl, sName, features);
+        if (PopupOpen) PopupOpen.focus();
+    }
+
+    function jsPDFViewer(filePath){
+        console.log(filePath);
+        filePath = "/uploads/"+filePath;
+        console.log(filePath);
+        // view 페이지에 <input type="hidden" id="filePath" valus=""/> 추가
+        $("#filePath").val(filePath);
+
+        jsApuntePopupExe("/plugins/pdfjs/web/viewer.html", "PDFViewer", "900", "600");
+    }
       
   </script>
 </body>

@@ -163,7 +163,7 @@ app.post('/adminList', function(req, res){
         }
     });*/
     pool.getConnection(function(err,conn){
-        conn.query("SELECT ty_id, title, subtitle, cont, start_dt, end_dt from ty_career",function(err,rows){
+        conn.query("SELECT ty_id, title, subtitle, cont, start_dt, end_dt, file_path, file_name, file_origin_name from ty_career order by ty_id",function(err,rows){
         //rows를 처리할 내용
         res.send(rows);
         //release를 해주어 커넥션이 pool로 되돌아 갈 수 있도록 해줍니다.
@@ -186,7 +186,7 @@ app.post('/careerModData', function(req, res){
     var ty_id = req.body.data;
     
      pool.getConnection(function(err,conn){
-        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name  from ty_career where ty_id = "+ty_id,function(err,rows){
+        conn.query("SELECT ty_id, title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name from ty_career where ty_id = "+ty_id,function(err,rows){
         if(err){
             throw err;
         }else{
@@ -216,18 +216,17 @@ app.post('/careerAdd', upload.single('uploadFile'), function(req, res){
     var end_dt = req.body.end_dt;
     var cont = req.body.cont;
 
-    var file_path = req.file.path;
-    var file_name = req.file.filename;
-    var file_origin_name = req.file.originalname;
+    var file_path = null;
+    var file_name = null;
+    var file_origin_name = null;
     
+    if (typeof req.file != "undefined" && req.file != null){
+        file_path = req.file.path;
+        file_name = req.file.filename;
+        file_origin_name = req.file.originalname;
+    }
     
     var params = [title,subtitle,start_dt,end_dt,cont,file_path,file_name,file_origin_name];
-   
-    /*console.log(title);
-    console.log(subtitle);
-    console.log(start_dt);
-    console.log(end_dt);
-    console.log(cont);*/
     
     var sql = 'insert into ty_career(title, subtitle, start_dt, end_dt, cont, file_path, file_name, file_origin_name) values(?,?,?,?,?,?,?,?)'
     
@@ -263,14 +262,18 @@ app.post('/careerModReal', upload.single('uploadFile'), function(req, res){
     var end_dt = req.body.end_dt;
     var cont = req.body.cont;
     
-    if(req.file.path != null){
-        var file_path = req.file.path;
-        var file_name = req.file.filename;
-        var file_origin_name = req.file.originalname;
+    var file_path = null;
+    var file_name = null;
+    var file_origin_name = null;
+    
+    if (typeof req.file != "undefined" && req.file != null){
+        file_path = req.file.path;
+        file_name = req.file.filename;
+        file_origin_name = req.file.originalname;
     }else{
-        var file_path = req.body.file_path;
-        var file_name = req.body.file_name;
-        var file_origin_name = req.body.file_origin_name;
+        file_path = req.body.file_path;
+        file_name = req.body.file_name;
+        file_origin_name = req.body.file_origin_name;
     }
    
     
