@@ -163,7 +163,7 @@ app.post('/adminList', function(req, res){
         }
     });*/
     pool.getConnection(function(err,conn){
-        conn.query("SELECT ty_id, title, subtitle, cont, start_dt, end_dt, file_path, file_name, file_origin_name from ty_career order by ty_id",function(err,rows){
+        conn.query("SELECT ty_id, title, subtitle, cont, start_dt, end_dt, file_path, file_name, file_origin_name from ty_career order by ty_id desc",function(err,rows){
         //rows를 처리할 내용
         res.send(rows);
         //release를 해주어 커넥션이 pool로 되돌아 갈 수 있도록 해줍니다.
