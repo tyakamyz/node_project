@@ -5,7 +5,7 @@
             type:'post',
             success:function(data){
                 $(data).each(function(index,item){
-                    $('#experienceList').append('<div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"><div class="resume-content">'
+                    $('#experienceList').append('<div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5"><div class="resume-content" style="max-width: 850px;">'
                                                +'<h3 class="mb-0">'+item.title+'</h3>'
                                                +'<div class="subheading mb-3">'+item.subtitle+'</div>'
                                                +'<p>'+item.cont+'</p></div>'

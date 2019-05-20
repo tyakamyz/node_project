@@ -13,7 +13,7 @@
     <div class="in-line test">
         <form name="loginForm" onSubmit="return false">
             <input class="login_common login_input" type="password" id="pwd" name="pwd" value="" placeholder="PASSWORD">
-            <input class="login_common login_btn" type="button" id="loginBtn" value="JOIN" onClick="javascript:jsLogin();">
+            <input class="login_common login_btn" type="button" id="loginBtn" value="LOGIN" onClick="javascript:jsLogin();">
         </form>
     </div>
 </div>
