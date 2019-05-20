@@ -42,7 +42,7 @@
     <form name="modForm" method="post" action="/careerModReal" enctype="multipart/form-data">
     <input type="hidden" id="ty_id" name="ty_id" value="" />
     <input type="hidden" id="ty_id" name="file_path" value="" />
-    <input type="hidden" id="ty_id" name="file_name, file_origin_name" value="" />
+    <input type="hidden" id="ty_id" name="file_name" value="" />
     <input type="hidden" id="ty_id" name="file_origin_name" value="" />
     <ul class="fa-ul mb-0">
         <li>

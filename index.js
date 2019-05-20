@@ -208,7 +208,7 @@ app.post('/careerModData', function(req, res){
 
 app.post('/careerAdd', upload.single('uploadFile'), function(req, res){
     
-    //console.log(req.file); 
+    console.log("/careerAdd"); 
     
     var title = req.body.title;
     var subtitle = req.body.subtitle;
@@ -255,6 +255,9 @@ app.post('/careerAdd', upload.single('uploadFile'), function(req, res){
 });
 
 app.post('/careerModReal', upload.single('uploadFile'), function(req, res){
+    
+    console.log("/careerModReal"); 
+    
     var ty_id = req.body.ty_id;
     var title = req.body.title;
     var subtitle = req.body.subtitle;
