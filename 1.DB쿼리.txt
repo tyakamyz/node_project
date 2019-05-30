@@ -1,0 +1,29 @@
+﻿CREATE TABLE `ty_career` (
+  `ty_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(250) DEFAULT NULL,
+  `subtitle` varchar(250) DEFAULT NULL,
+  `start_dt` varchar(9) DEFAULT NULL,
+  `end_dt` varchar(9) DEFAULT NULL,
+  `cont` mediumtext,
+  `file_path` varchar(250) DEFAULT NULL,
+  `file_name` varchar(250) DEFAULT NULL,
+  `file_origin_name` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`ty_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `ty_login` (
+  `pwd` varchar(1000) DEFAULT NULL,
+  `salt` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+insert into `ty_login`(`pwd`,`salt`) values ('OQQT2qmjZzR3JTzbhW9u+o1jbHsx/k/jKm9MD6EJ1mNVRXf53qa8oTcA4NR8JtXiU8PKpojqJZohCLsmpEBSjQ==','LJBVjtUu5QvmT6O4EXlGIY9oeDZl0P/A0Ns8sFdz+ERH5n/FjuzOA9YPIfiK6on40F2HkcA9v7Mkd6ekdKbA7w==');
+
+
+//패스워드 test

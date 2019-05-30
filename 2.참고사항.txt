@@ -1,0 +1,5 @@
+forever start index.js 로 실행해야 putty꺼도 서버 안내려감
+
+
+was : node express (express npm 설치하면됨)
+db : mysql
