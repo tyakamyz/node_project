@@ -3,3 +3,10 @@ forever start index.js 로 실행해야 putty꺼도 서버 안내려감
 
 was : node express (express npm 설치하면됨)
 db : mysql
+
+
+
+
+
+-- mysql 버전문제로 안될때
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
